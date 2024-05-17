@@ -31,7 +31,7 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen
           name="index"
-          options={{ headerShown: true, title: "Trang chủ nè cưng" }}
+          options={{ headerShown: true, title: "Trang chủ nè cưng ơi" }}
         />
         <Stack.Screen name="+not-found" />
       </Stack>
