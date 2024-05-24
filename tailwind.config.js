@@ -1,14 +1,84 @@
-/** @type {import('tailwindcss').Config} */
+// /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   theme: {
     container: {
       center: true,
-      padding: "1.25rem",
+      padding: "20px",
     },
-    extend: {},
+
+    extend: {
+      fontFamily: {
+        SVNPoppins900: ["SVNPoppins900"],
+        SVNPoppins900Italic: ["SVNPoppins900Italic"],
+
+        SVNPoppins800: ["SVNPoppins800"],
+        SVNPoppins800Italic: ["SVNPoppins800Italic"],
+
+        SVNPoppins700: ["SVNPoppins700"],
+        SVNPoppins700Italic: ["SVNPoppins700Italic"],
+
+        SVNPoppins600: ["SVNPoppins600"],
+        SVNPoppins600Italic: ["SVNPoppins600Italic"],
+
+        SVNPoppins500: ["SVNPoppins500"],
+        SVNPoppins500Italic: ["SVNPoppins500Italic"],
+
+        SVNPoppins400: ["SVNPoppins400"],
+        SVNPoppins400Italic: ["SVNPoppins400Italic"],
+
+        SVNPoppins300: ["SVNPoppins300"],
+        SVNPoppins300Italic: ["SVNPoppins300Italic"],
+
+        SVNPoppins200: ["SVNPoppins200"],
+        SVNPoppins200Italic: ["SVNPoppins200Italic"],
+
+        SVNPoppins100: ["SVNPoppins100"],
+        SVNPoppins100Italic: ["SVNPoppins100Italic"],
+      },
+      colors: {
+        light: {
+          primary: "#ff4757",
+          background: "#f2f2f2",
+          card: "rgb(255, 255, 255)",
+          text: "#2f3542",
+          greyed: "#a4b0be",
+          link: "#1e90ff",
+          border: "rgb(216, 216, 216)",
+          notification: "rgb(255, 59, 48)",
+        },
+        dark: {
+          primary: "#ff6b81",
+          background: "rgb(1, 1, 1)",
+          card: "rgb(18, 18, 18)",
+          text: "#dfe4ea",
+          greyed: "#a4b0be",
+          link: "#1e90ff",
+          border: "rgb(39, 39, 41)",
+          notification: "rgb(255, 69, 58)",
+        },
+      },
+    },
   },
+
   // this mustn't be included when dev with react native and nativewind
   // darkMode: "class",
-  plugins: [],
+  plugins: [
+    // plugin(function ({ addBase, addComponents, addUtilities, theme }) {
+    //   addUtilities({
+    //     ".text-4xl": {
+    //       paddingTop: theme("spacing.3"),
+    //       fontSize: theme("fontSize.4xl"),
+    //       lineHeight: theme("spacing.10"),
+    //       // ...defaultTheme.fontSize["4xl"][1],
+    //       // fontSize: defaultTheme.fontSize["4xl"][0],
+    //       // ...defaultTheme.fontSize["4xl"][1],
+    //     },
+    //     //   //   ".text-4xlz": {
+    //     //   //     paddingTop: theme("spacing.2"),
+    //     //   //     backgroundColor: theme("colors.red.400"),
+    //     //   //   },
+    //   });
+    // }),
+  ],
 };

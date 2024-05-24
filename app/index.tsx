@@ -1,9 +1,21 @@
-import { Text, View } from "react-native";
+import BText from "@/components/BText";
+import BView from "@/components/BView";
+import DarkLightToggle from "@/components/DarkLightToggle";
 
-export default function Index2() {
+export default function Index() {
   return (
-    <View className="flex-1 items-center justify-center dark:bg-red-100">
-      <Text className="items-center justify-center dark:text-4xl dark:text-red-600">Bình nè cục cưng ơi :{">"}</Text>
-    </View>
+    <BView className="flex-1 items-center justify-center gap-5">
+      <BText type="text">Bình nè cục cưng ơi :{">"}</BText>
+
+      <BText
+        type="link"
+        href={"(tabs)"}
+        size="6xl"
+      >
+        Home nè
+      </BText>
+
+      <DarkLightToggle />
+    </BView>
   );
 }

@@ -1,0 +1,4 @@
+- text with border? border css work on android and web, but not ios, try wrap with a View with border css
+- nativewind will convert className string into style object
+- top of text may cutout with some custom font if the font size too hight, add manual padding top to prevent this happend
+- if adding padding but text still cutout, wrap text with a <View />
