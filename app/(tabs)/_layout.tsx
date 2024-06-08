@@ -1,23 +1,15 @@
-import BTabs from "@/components/BTabs";
-import TabBarIcon from "@/components/TabBarIcon";
+import BTabs from "@/components/Base/BTabs";
+import TabBarIcon from "@/components/Base/TabBarIcon";
 import { Entypo, FontAwesome, Ionicons } from "@expo/vector-icons";
 import React from "react";
 
-export interface TabLayoutProps {
-  //
-}
-
-function TabLayout(props: TabLayoutProps) {
-  const {
-    //
-
-    ..._props
-  } = props;
-
+function TabLayout() {
   return (
     <BTabs
       screenOptions={{
         headerShown: false,
+        unmountOnBlur: true,
+        // lazy: false,
       }}
     >
       <BTabs.Screen
@@ -31,8 +23,11 @@ function TabLayout(props: TabLayoutProps) {
                 <Entypo
                   name="drive"
                   size={26}
-                  color={props.color}
                 />
+                // <EmptySvg
+                //   color={props.color}
+                //   size={26}
+                // />
               }
               {...props}
             />
@@ -50,7 +45,6 @@ function TabLayout(props: TabLayoutProps) {
                 <FontAwesome
                   name="user"
                   size={26}
-                  color={props.color}
                 />
               }
               {...props}
@@ -69,7 +63,6 @@ function TabLayout(props: TabLayoutProps) {
                 <Ionicons
                   name="settings"
                   size={26}
-                  color={props.color}
                 />
               }
               {...props}

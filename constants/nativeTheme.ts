@@ -8,7 +8,7 @@ const {
 type BaseThemeColors = Theme["colors"];
 type CustomTailwindColors = typeof dark;
 
-interface IColors extends BaseThemeColors, CustomTailwindColors {}
+export interface IColors extends BaseThemeColors, CustomTailwindColors {}
 
 export type TCustomTheme = Omit<Theme, "colors"> & {
   colors: IColors;
@@ -24,3 +24,15 @@ export const CustomLightTheme: TCustomTheme = {
   dark: false,
   colors: light,
 };
+
+export type IColorsLightDarkMap<Colors extends IColors> = {
+  [Property in keyof Colors as `${string & Property}Light` | `${string & Property}Dark`]: Colors[Property];
+};
+export const colorsDarkLight: IColorsLightDarkMap<IColors> = {} as any;
+
+for (const key in CustomLightTheme.colors) {
+  const lightKey = key + "Light";
+  const darkKey = key + "Dark";
+  (colorsDarkLight as any)[lightKey] = (CustomLightTheme.colors as any)[key];
+  (colorsDarkLight as any)[darkKey] = (CustomDarkTheme.colors as any)[key];
+}

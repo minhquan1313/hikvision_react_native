@@ -1,5 +1,5 @@
-import BText from "@/components/BText";
-import BView from "@/components/BView";
+import BText from "@/components/Base/BText";
+import BView from "@/components/Base/BView";
 import { Stack } from "expo-router";
 import { StyleSheet } from "react-native";
 

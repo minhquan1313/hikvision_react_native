@@ -1,4 +1,5 @@
-import BText from "@/components/BText";
+import BText from "@/components/Base/BText";
+import { tabBarHeight } from "@/constants/tabBarHeight";
 import { useCustomColor } from "@/hooks/useCustomColor";
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import { Tabs } from "expo-router";
@@ -24,8 +25,12 @@ function BTabs(props: BTabsProps) {
         tabBarShowLabel: false,
         tabBarInactiveTintColor: greyed,
         tabBarActiveTintColor: primary,
-        tabBarStyle: Platform.OS === "web" && {
-          height: 56,
+        tabBarStyle: {
+          ...(tabBarHeight[Platform.OS]
+            ? {
+                height: tabBarHeight[Platform.OS],
+              }
+            : {}),
         },
         headerTitle(props) {
           return <BText type="header title">{props.children}</BText>;

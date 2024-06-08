@@ -1,6 +1,6 @@
-import BText from "@/components/BText";
-import BView from "@/components/BView";
-import DarkLightToggle from "@/components/DarkLightToggle";
+import BText from "@/components/Base/BText";
+import BView from "@/components/Base/BView";
+import DarkLightToggle from "@/components/Base/DarkLightToggle";
 
 export default function Index() {
   return (
@@ -9,13 +9,17 @@ export default function Index() {
 
       <BText
         type="link"
-        href={"(tabs)"}
+        href="(tabs)/user"
         size="6xl"
       >
         Home nè
       </BText>
 
-      <DarkLightToggle />
+      <DarkLightToggle
+        circle
+        // size="7xl"
+        // borderless
+      />
     </BView>
   );
 }

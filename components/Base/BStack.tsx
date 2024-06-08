@@ -1,4 +1,4 @@
-import BText from "@/components/BText";
+import BText from "@/components/Base/BText";
 import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import { Stack } from "expo-router";
 

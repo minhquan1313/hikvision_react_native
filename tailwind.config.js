@@ -38,10 +38,11 @@ module.exports = {
       },
       colors: {
         light: {
-          primary: "#ff4757",
+          primary: "#ff6b81",
           background: "#f2f2f2",
           card: "rgb(255, 255, 255)",
           text: "#2f3542",
+          "text-alt": "#57606f",
           greyed: "#a4b0be",
           link: "#1e90ff",
           border: "rgb(216, 216, 216)",
@@ -51,7 +52,8 @@ module.exports = {
           primary: "#ff6b81",
           background: "rgb(1, 1, 1)",
           card: "rgb(18, 18, 18)",
-          text: "#dfe4ea",
+          text: "#f1f2f6",
+          "text-alt": "#dfe4ea",
           greyed: "#a4b0be",
           link: "#1e90ff",
           border: "rgb(39, 39, 41)",
@@ -63,22 +65,5 @@ module.exports = {
 
   // this mustn't be included when dev with react native and nativewind
   // darkMode: "class",
-  plugins: [
-    // plugin(function ({ addBase, addComponents, addUtilities, theme }) {
-    //   addUtilities({
-    //     ".text-4xl": {
-    //       paddingTop: theme("spacing.3"),
-    //       fontSize: theme("fontSize.4xl"),
-    //       lineHeight: theme("spacing.10"),
-    //       // ...defaultTheme.fontSize["4xl"][1],
-    //       // fontSize: defaultTheme.fontSize["4xl"][0],
-    //       // ...defaultTheme.fontSize["4xl"][1],
-    //     },
-    //     //   //   ".text-4xlz": {
-    //     //   //     paddingTop: theme("spacing.2"),
-    //     //   //     backgroundColor: theme("colors.red.400"),
-    //     //   //   },
-    //   });
-    // }),
-  ],
+  plugins: [],
 };

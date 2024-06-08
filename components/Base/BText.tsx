@@ -1,6 +1,6 @@
 import { cn } from "@/utils/cn";
 import { Link } from "expo-router";
-import { Platform, Text, TextProps } from "react-native";
+import { Text, TextProps } from "react-native";
 import { fontSize } from "tailwindcss/defaultTheme";
 
 type LinkProps = Parameters<typeof Link>[0];
@@ -16,8 +16,11 @@ interface BTextNormal extends BTextCommon, TextProps {
     | "mini text"
     | "tab text"
     | "tab text highlight"
+    | "button pri"
+    | "button alt"
     //
-    | "text";
+    | "text"
+    | "text alt";
 }
 
 interface BTextCommon {
@@ -42,6 +45,7 @@ function BText(props: BTextProps) {
         {
           // break at text-4xl: top of text is cut off
           "font-SVNPoppins400 text-base text-light-text dark:text-dark-text": type === "text",
+          "font-SVNPoppins400 text-base text-light-text-alt dark:text-dark-text-alt ": type === "text alt",
           "font-SVNPoppins400 text-sm text-light-text dark:text-dark-text": type === "mini text",
           "font-SVNPoppins400 text-xs text-light-greyed dark:text-dark-greyed": type === "tab text",
           "font-SVNPoppins500 text-xs text-light-primary dark:text-dark-primary": type === "tab text highlight",
@@ -49,9 +53,12 @@ function BText(props: BTextProps) {
           "font-SVNPoppins400 text-lg text-light-text dark:text-dark-text": type === "header title",
 
           "font-SVNPoppins700 text-xl text-light-text dark:text-dark-text": type === "title",
-          "font-SVNPoppins600 text-lg text-light-text dark:text-dark-text": type === "subtitle",
+          "font-SVNPoppins500 text-lg text-light-text dark:text-dark-text": type === "subtitle",
 
           "font-SVNPoppins400 text-base text-light-link dark:text-dark-link": type === "link",
+
+          "text-center font-SVNPoppins500 text-lg text-white dark:text-dark-primary": type === "button pri",
+          "text-center font-SVNPoppins400 text-lg text-light-greyed dark:text-dark-greyed": type === "button alt",
         },
         size !== undefined && {
           "text-xs": size === "xs",
@@ -69,17 +76,17 @@ function BText(props: BTextProps) {
           "text-8xl leading-[100px]": size === "8xl",
           "text-9xl leading-[100px]": size === "9xl",
         },
-        Platform.OS !== "web" &&
-          size !== undefined && {
-            "pt-0.5": size === "2xl",
-            "pt-2": size === "3xl",
-            "pt-3": size === "4xl",
-            "pt-4": size === "5xl",
-            "pt-5": size === "6xl",
-            "pt-6": size === "7xl",
-            "pt-7": size === "8xl",
-            "pt-8": size === "9xl",
-          },
+
+        size !== undefined && {
+          "pt-0.5": size === "2xl",
+          "pt-2": size === "3xl",
+          "pt-3": size === "4xl",
+          "pt-4": size === "5xl",
+          "pt-5": size === "6xl",
+          "pt-6": size === "7xl",
+          "pt-7": size === "8xl",
+          "pt-8": size === "9xl",
+        },
         // "border border-red-400",
         // "bg-red-400",
       )}
