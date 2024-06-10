@@ -1,4 +1,3 @@
-import BInput from "@/components/Base/BInput";
 import BSafeAreaView from "@/components/Base/BSafeAreaView";
 import BText from "@/components/Base/BText";
 import BView from "@/components/Base/BView";
@@ -76,7 +75,7 @@ function UserList(props: UserListProps) {
             </BView>
           </BView>
         }
-        ListFooterComponent={<BInput value="123" />}
+        ListFooterComponent={<>{/* <BInput value="123" /> */}</>}
         contentContainerStyle={{
           height: "100%",
         }}
@@ -87,7 +86,6 @@ function UserList(props: UserListProps) {
           />
         }
       />
-      <BInput value="123" />
 
       <BView
         className="flex-row items-end justify-end space-x-4 p-5"

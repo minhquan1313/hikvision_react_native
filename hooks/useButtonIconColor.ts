@@ -13,5 +13,6 @@ export function useButtonIconColor(params: { disabled: boolean | undefined; prim
     return colorScheme === "light" ? textDark : text;
   }
 
-  return colorScheme === "light" ? textDark : primary;
+  // return colorScheme === "light" ? textAlt : primary;
+  return primary;
 }
