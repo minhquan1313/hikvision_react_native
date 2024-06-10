@@ -14,10 +14,11 @@ function DarkLightToggle(props: DarkLightToggleProps) {
   } = props;
 
   const { colorScheme, setColorScheme } = useColorScheme();
-  const color = useButtonIconColor();
+  const color = useButtonIconColor({ disabled: false, primary: true });
 
   return (
     <BButton
+      primary
       size="2xl"
       onPress={() => {
         setColorScheme(colorScheme === "light" ? "dark" : "light");

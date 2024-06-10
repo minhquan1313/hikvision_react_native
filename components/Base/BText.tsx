@@ -57,8 +57,8 @@ function BText(props: BTextProps) {
 
           "font-SVNPoppins400 text-base text-light-link dark:text-dark-link": type === "link",
 
-          "text-center font-SVNPoppins500 text-lg text-white dark:text-dark-primary": type === "button pri",
-          "text-center font-SVNPoppins400 text-lg text-light-greyed dark:text-dark-greyed": type === "button alt",
+          "text-center font-SVNPoppins500 text-lg text-white": type === "button pri",
+          "text-center font-SVNPoppins400 text-lg text-light-text dark:text-dark-text": type === "button alt",
         },
         size !== undefined && {
           "text-xs": size === "xs",

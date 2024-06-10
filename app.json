@@ -26,7 +26,7 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": ["expo-router", "./plugins/expoWithFullScreenDialogStyles.ts"],
+    "plugins": ["expo-router", "react-native-reanimated/plugin"],
     "experiments": {
       "typedRoutes": true
     }

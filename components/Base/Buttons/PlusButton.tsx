@@ -12,7 +12,7 @@ function PlusButton(props: PlusButtonProps) {
 
     ..._props
   } = props;
-  const color = useButtonIconColor();
+  const color = useButtonIconColor({ disabled: props.disabled });
 
   return (
     <BButton
