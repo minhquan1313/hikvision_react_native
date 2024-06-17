@@ -1,15 +1,17 @@
 import { IColors, IColorsLightDarkMap } from "@/constants/nativeTheme";
 import { useCustomColor } from "@/hooks/useCustomColor";
-import { setBackgroundColorAsync } from "expo-navigation-bar";
+import { sleep } from "@/utils/sleep";
+import { getBackgroundColorAsync, setBackgroundColorAsync } from "expo-navigation-bar";
 import { useSegments } from "expo-router";
 import { useColorScheme } from "nativewind";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Platform } from "react-native";
 
 const isAndroid = Platform.OS === "android";
 
 export function useBottomBarAndroid(
   params: {
+    autoUpdate?: boolean;
     color?:
       | string
       | {
@@ -19,11 +21,12 @@ export function useBottomBarAndroid(
     themeColor?: keyof (IColors & IColorsLightDarkMap<IColors>);
   } = {},
 ) {
-  const { color, themeColor } = params;
+  const { color, themeColor, autoUpdate = true } = params;
 
   const route = useSegments();
-  const [routeInit, setRouteInit] = useState<string>(String(route));
+  const [routeInit] = useState<string>(String(route));
   const { colorScheme } = useColorScheme();
+  const revertColor = useRef("");
 
   const colors = useCustomColor();
 
@@ -31,34 +34,27 @@ export function useBottomBarAndroid(
     // console.log(`🚀 ~ route:`, { route, routeInit });
     if (routeInit === undefined || String(route) !== routeInit) return;
 
+    const c = getColorToUpdate();
+
+    if (c) {
+      await setBottomBarColor(c);
+    }
+  }
+
+  function getColorToUpdate() {
     if (color) {
       if (typeof color === "string") {
-        await setBottomBarColor(color);
+        return color;
       } else {
-        await setBottomBarColor(color[colorScheme]);
+        return color[colorScheme];
       }
-      return;
     }
 
     if (themeColor) {
-      await setBottomBarColor(colors[themeColor]);
-      return;
+      return colors[themeColor];
     }
   }
-  useEffect(() => {
-    updateColor();
-  }, [route, colorScheme]);
 
-  // useEffect(() => {
-  //   setRouteInit(String(route));
-  // }, []);
-
-  // async function setBottomBarColor(color: keyof IColors | "transparent") {
-  //   if (!isAndroid) return Promise.resolve();
-  //   await setBackgroundColorAsync(color !== "transparent" ? colors[color] : "#ffffff00");
-
-  //   return Promise.resolve();
-  // }
   async function setBottomBarColor(color: string | "transparent") {
     if (!isAndroid) return Promise.resolve();
     await setBackgroundColorAsync(color !== "transparent" ? color : "#ffffff00");
@@ -66,18 +62,71 @@ export function useBottomBarAndroid(
     return Promise.resolve();
   }
 
-  //   async function revert() {
-  //     if (!isAndroid) return Promise.resolve();
+  async function revert() {
+    if (!isAndroid || revertColor.current === "") return Promise.resolve();
+    await setBackgroundColorAsync(revertColor.current);
+  }
 
-  //     try {
-  //       await setBackgroundColorAsync(backgroundColor.current);
-  //     } catch (error) {
-  //       alert(error);
-  //     }
+  async function getColor() {
+    if (!isAndroid) return "";
+    return (await getBackgroundColorAsync()).toString();
+  }
 
-  //     return Promise.resolve();
-  //   }
+  async function forceUpdate(maxTry = 3) {
+    let i = 0;
+    while (i < maxTry) {
+      await updateColor();
 
-  return { forceUpdate: updateColor, setBottomBarColor };
-  // return { setBottomBarColor };
+      await sleep(100);
+
+      const currentColor = await getColor();
+      const cToUpdate = getColorToUpdate();
+
+      if (cToUpdate === undefined || currentColor === cToUpdate) {
+        return;
+      }
+      i++;
+    }
+  }
+
+  async function forceSetBottomBarColor(color: string | "transparent", maxTry = 3) {
+    let i = 0;
+    while (i < maxTry) {
+      await setBottomBarColor(color);
+
+      await sleep(100);
+
+      const currentColor = await getColor();
+      const cToUpdate = getColorToUpdate();
+
+      if (cToUpdate === undefined || currentColor === cToUpdate) {
+        return;
+      }
+      i++;
+    }
+  }
+
+  useEffect(() => {
+    (async () => {
+      try {
+        if (isAndroid) {
+          revertColor.current = (await getBackgroundColorAsync()).toString();
+        }
+      } catch (error) {}
+
+      if (autoUpdate) {
+        updateColor();
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [route, colorScheme]);
+
+  const result = {
+    forceUpdate,
+    forceSetBottomBarColor,
+
+    revert,
+    setBottomBarColor,
+  };
+  return result;
 }

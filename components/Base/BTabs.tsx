@@ -26,7 +26,7 @@ function BTabs(props: BTabsProps) {
         tabBarInactiveTintColor: greyed,
         tabBarActiveTintColor: primary,
         tabBarStyle: {
-          ...(tabBarHeight[Platform.OS]
+          ...(typeof tabBarHeight[Platform.OS] === "number"
             ? {
                 height: tabBarHeight[Platform.OS],
               }

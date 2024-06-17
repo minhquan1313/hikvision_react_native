@@ -1,7 +1,7 @@
 import { ILoginAccount } from "@/types/ILoginAccount";
 import { RChildren } from "@/types/RChildren";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useRef } from "react";
 import { Updater, useImmer } from "use-immer";
 
 export interface CameraDataProviderProps extends RChildren {}
@@ -19,33 +19,56 @@ function UserListProvider(props: CameraDataProviderProps) {
 
   const [list, setList] = useImmer<ILoginAccount[]>([]);
   const { getItem, setItem } = useAsyncStorage(key);
+  const isInit = useRef(true);
 
-  const setCameraList: typeof setList = (param) => {
-    setList(param);
-  };
+  const defaultInit: ILoginAccount[] = [
+    {
+      useId: "1",
+      username: "admin",
+      password: "thaothang19",
+    },
+    {
+      useId: "2",
+      username: "test1",
+      password: "pass1",
+    },
+    {
+      useId: "3",
+      username: "test2",
+      password: "pass2",
+    },
+  ];
 
   useEffect(() => {
     getItem((err, result) => {
+      isInit.current = false;
+
       if (err) {
+        //
       }
 
-      if (result === null || result === undefined) {
-        setItem("[]");
+      if (result === null || result === undefined || result === "[]") {
+        setItem(JSON.stringify(defaultInit));
+        setList(defaultInit);
+
+        // setItem("[]");
         return;
       }
 
       const data = JSON.parse(result);
+
       if (Array.isArray(data) && data.length > 0) setList(data);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    setItem(JSON.stringify(list), (err) => {
-      //
-    });
-  }, [list]);
+    if (isInit.current) return;
 
-  const value = [list, setCameraList] as const;
+    setItem(JSON.stringify(list));
+  }, [list, setItem]);
+
+  const value = [list, setList] as const;
 
   return (
     <Context.Provider

@@ -1,18 +1,18 @@
 import { useCustomColor } from "@/hooks/useCustomColor";
 import { useColorScheme } from "nativewind";
 
-export function useButtonIconColor(params: { disabled: boolean | undefined; primary?: boolean }) {
+export function useButtonIconColor(params: { disabled?: boolean; primary?: boolean } = {}) {
   const { disabled, primary: isPrimary } = params;
 
   const { colorScheme } = useColorScheme();
-  const { primary, textDark, greyed, "text-alt": textAlt, text } = useCustomColor();
+  const { primary, secondary, textDark, "text-alt": textAlt, text } = useCustomColor();
 
-  if (disabled) return text;
+  if (disabled) return textAlt;
 
   if (isPrimary) {
     return colorScheme === "light" ? textDark : text;
   }
 
-  // return colorScheme === "light" ? textAlt : primary;
-  return primary;
+  return colorScheme === "light" ? primary : text;
+  // return primary;
 }

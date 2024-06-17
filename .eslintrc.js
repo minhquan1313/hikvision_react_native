@@ -4,7 +4,11 @@ module.exports = {
   env: {
     node: true,
   },
+  plugins: ["react-refresh"],
   rules: {
-    "react-hooks/exhaustive-deps": "off", // <--- THIS IS THE NEW RULE
+    "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
+    // "react-hooks/exhaustive-deps": "off", // <--- THIS IS THE NEW RULE
   },
 };

@@ -1,17 +1,17 @@
 import BButton, { BButtonProps } from "@/components/Base/BButton";
 import { buttonIconSize } from "@/constants/buttonIconConst";
 import { useButtonIconColor } from "@/hooks/useButtonIconColor";
-import { Entypo } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { forwardRef, memo } from "react";
 
-export interface PlusButtonProps extends BButtonProps {
+export interface SelectAllButtonProps extends BButtonProps {
   //
 }
 
-export type PlusButtonRef = null;
+export type SelectAllButtonRef = null;
 
-const PlusButton = memo(
-  forwardRef<PlusButtonRef, PlusButtonProps>(function PlusButton(props, ref) {
+const SelectAllButton = memo(
+  forwardRef<SelectAllButtonRef, SelectAllButtonProps>(function SelectAllButton(props, ref) {
     const {
       //
 
@@ -23,8 +23,8 @@ const PlusButton = memo(
     return (
       <BButton
         icon={
-          <Entypo
-            name="circle-with-plus"
+          <MaterialIcons
+            name="select-all"
             size={buttonIconSize}
             color={color}
           />
@@ -35,4 +35,4 @@ const PlusButton = memo(
   }),
 );
 
-export default PlusButton;
+export default SelectAllButton;

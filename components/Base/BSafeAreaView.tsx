@@ -1,5 +1,4 @@
 import BView from "@/components/Base/BView";
-import { useKeyboardVisible } from "@/hooks/useKeyboardVisible";
 import { useMemo } from "react";
 import { KeyboardAvoidingView, Platform, ViewProps } from "react-native";
 import { Edge, useSafeAreaInsets } from "react-native-safe-area-context";
@@ -25,12 +24,12 @@ function BSafeAreaView(props: BSafeAreaViewProps) {
     ..._props
   } = props;
 
-  const { keyBoardHeight } = useKeyboardVisible();
+  // const { keyBoardHeight } = useKeyboardVisible();
 
   const insets = useSafeAreaInsets();
 
   const styles: BSafeAreaViewProps["style"] = useMemo(() => {
-    const keyBottom = (mode + "Bottom") as `${typeof mode}Bottom`;
+    // const keyBottom = (mode + "Bottom") as `${typeof mode}Bottom`;
 
     // if (withKeyboardOnly) {
     //   // animationKeyboard();
@@ -54,9 +53,15 @@ function BSafeAreaView(props: BSafeAreaViewProps) {
     //   animationKeyboard();
     //   edgesBase[keyBottom] = Platform.OS === "ios" ? keyBoardHeight : edgesBase[keyBottom];
     // }
+    // console.log(`safearea m`);
 
     return edgesBase;
-  }, [JSON.stringify([edges, excludeEdges]), mode, insets, keyBoardHeight, withKeyboard, withKeyboardOnly]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify([edges, excludeEdges]), mode, insets]);
+
+  // useEffect(() => {
+  //   console.log(`safearea`, t, edges);
+  // });
 
   // function animationKeyboard(ms = 300) {
   // Keyboard.scheduleLayoutAnimation({
@@ -82,7 +87,7 @@ function BSafeAreaView(props: BSafeAreaViewProps) {
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={[!withKeyboardOnly && styles, additionStyle]}
-        // className="bg-red-300"
+        ignoreIOSKeyboardWillChangeEvents
         {..._props}
       >
         {children}

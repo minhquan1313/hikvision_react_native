@@ -1,6 +1,6 @@
-import BSafeAreaView from "@/components/Base/BSafeAreaView";
+import BSafeAreaView, { BSafeAreaViewProps } from "@/components/Base/BSafeAreaView";
 import BView from "@/components/Base/BView";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Modal, ModalProps, ScrollView } from "react-native";
 import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
@@ -12,6 +12,10 @@ export interface BModalProps extends ModalProps {
   animationOut?: boolean;
 }
 
+/**
+ * @deprecated
+ * Nah, I stopped building this shit after I found React Native Bottom Sheet :))))
+ */
 function BModal(props: BModalProps) {
   const {
     //
@@ -64,16 +68,28 @@ function BModal(props: BModalProps) {
         },
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visibleControl]);
 
+  // useEffect(() => {
+  //   console.log(`bModal`, { visible });
+  // });
+
+  const edges = useMemo<BSafeAreaViewProps["edges"]>(() => ["top"], []);
   return (
     <Modal
       visible={visible}
       transparent={true}
+      // statusBarTranslucent
       {..._props}
     >
+      {/* <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        className="rounded-t-3xl"
+      > */}
       <BSafeAreaView
-        withKeyboardOnly
+        withKeyboard
+        // edges={edges.current}
         className="mt-auto rounded-t-3xl"
         // className="absolute bottom-0 left-0 right-0 rounded-t-3xl"
       >
@@ -81,7 +97,7 @@ function BModal(props: BModalProps) {
           style={{
             overflow: "visible",
           }}
-          showsVerticalScrollIndicator={false}
+          // showsVerticalScrollIndicator={false}
         >
           <Animated.View
             className="rounded-t-3xl border border-b-0 border-light-border bg-light-background dark:border-dark-border dark:bg-dark-background"
@@ -93,6 +109,7 @@ function BModal(props: BModalProps) {
           <BView className="absolute left-0 right-0 top-full h-[999px] border border-y-0 border-light-border bg-light-background dark:border-dark-border dark:bg-dark-background" />
         </ScrollView>
       </BSafeAreaView>
+      {/* </KeyboardAvoidingView> */}
     </Modal>
   );
 }

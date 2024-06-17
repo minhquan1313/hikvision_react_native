@@ -1,17 +1,17 @@
 import BButton, { BButtonProps } from "@/components/Base/BButton";
 import { buttonIconSize } from "@/constants/buttonIconConst";
 import { useButtonIconColor } from "@/hooks/useButtonIconColor";
-import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { forwardRef, memo } from "react";
 
-export interface PlusButtonProps extends BButtonProps {
+export interface DeleteButtonProps extends BButtonProps {
   //
 }
 
-export type PlusButtonRef = null;
+export type DeleteButtonRef = null;
 
-const PlusButton = memo(
-  forwardRef<PlusButtonRef, PlusButtonProps>(function PlusButton(props, ref) {
+const DeleteButton = memo(
+  forwardRef<DeleteButtonRef, DeleteButtonProps>(function DeleteButton(props, ref) {
     const {
       //
 
@@ -23,8 +23,8 @@ const PlusButton = memo(
     return (
       <BButton
         icon={
-          <Entypo
-            name="circle-with-plus"
+          <AntDesign
+            name="delete"
             size={buttonIconSize}
             color={color}
           />
@@ -35,4 +35,4 @@ const PlusButton = memo(
   }),
 );
 
-export default PlusButton;
+export default DeleteButton;

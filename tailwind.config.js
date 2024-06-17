@@ -39,6 +39,7 @@ module.exports = {
       colors: {
         light: {
           primary: "#ff6b81",
+          secondary: "#F6F6F6",
           background: "#f2f2f2",
           card: "rgb(255, 255, 255)",
           text: "#2f3542",
@@ -49,11 +50,12 @@ module.exports = {
           notification: "rgb(255, 59, 48)",
         },
         dark: {
-          primary: "#ff6b81",
+          primary: "#D4596C",
+          secondary: "#2F2F42",
           background: "rgb(1, 1, 1)",
           card: "rgb(18, 18, 18)",
           text: "#f1f2f6",
-          "text-alt": "#dfe4ea",
+          "text-alt": "#B6BBC0",
           greyed: "#a4b0be",
           link: "#1e90ff",
           border: "rgb(39, 39, 41)",

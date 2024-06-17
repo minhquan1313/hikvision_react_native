@@ -4,17 +4,7 @@ import BView from "@/components/Base/BView";
 import DarkLightToggle from "@/components/Base/DarkLightToggle";
 import { ScrollView } from "react-native";
 
-export interface SettingProps {
-  //
-}
-
-function Setting(props: SettingProps) {
-  const {
-    //
-
-    ..._props
-  } = props;
-
+function Setting() {
   return (
     <BSafeAreaView
       excludeEdges={["bottom"]}
